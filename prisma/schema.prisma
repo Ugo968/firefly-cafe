@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model MenuItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Int
+  // House (seeded) price — what `price` reverts to when the admin undoes a
+  // manual price change. 0 on legacy rows until backfilled.
+  basePrice   Int      @default(0)
+  category    String
+  tags        String   @default("")
+  spiceLevel  Int      @default(0)
+  image       String?
+  featured    Boolean  @default(false)
+  available   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  photo       MenuItemPhoto?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Admin-uploaded photo for a menu item — takes display precedence over the
+// seeded house image, which stays untouched underneath (remove = revert).
+model MenuItemPhoto {
+  id        String   @id @default(cuid())
+  itemId    String   @unique
+  item      MenuItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  mime      String   @default("image/jpeg")
+  size      Int      @default(0)
+  data      Bytes
+  createdAt DateTime @default(now())
+}
+
+// Admin-adjusted prices for the Celebrate add-ons; absent row = house default.
+model AddonPrice {
+  addonId   String   @id
+  price     Int
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String   @default("")
+  date      String
+  time      String
+  partySize Int
+  occasion  String   @default("casual")
+  notes     String   @default("")
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id            String    @id @default(cuid())
+  ref           String    @unique
+  name          String
+  phone         String
+  fulfil        String
+  address       String    @default("")
+  zoneId        String    @default("")
+  zone          String    @default("")
+  landmark      String    @default("")
+  items         String
+  subtotal      Int
+  fee           Int
+  total         Int
+  payment       String    @default("card")
+  paymentStatus String    @default("pending")
+  paymentRef    String    @default("")
+  status        String    @default("received")
+  payments      Payment[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Payment {
+  id         String   @id @default(cuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  ref        String   @unique
+  provider   String   @default("sandbox")
+  method     String
+  amount     Int
+  status     String   @default("initialized")
+  settlement String   @default("PENDING — merchant account not configured")
+  note       String   @default("")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Celebration {
+  id         String   @id @default(cuid())
+  name       String
+  phone      String
+  email      String   @default("")
+  date       String
+  time       String
+  occasion   String
+  guestCount Int
+  addOns     String   @default("")
+  notes      String   @default("")
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  tab       String   @default("moments")
+  caption   String   @default("")
+  alt       String   @default("")
+  mime      String   @default("image/jpeg")
+  width     Int      @default(0)
+  height    Int      @default(0)
+  size      Int      @default(0)
+  data      Bytes
+  createdAt DateTime @default(now())
+}

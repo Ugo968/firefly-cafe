@@ -1,0 +1,314 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-body);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  /* Firefly brand tokens — runtime-swappable (dark default, .light overrides) */
+  --color-espresso: var(--ff-espresso);
+  --color-espresso-deep: var(--ff-espresso-deep);
+  --color-espresso-soft: var(--ff-espresso-soft);
+  --color-gold: var(--ff-gold);
+  --color-amber-ember: var(--ff-amber-ember);
+  --color-cream: var(--ff-cream);
+  --color-moss: var(--ff-moss);
+  --color-moss-soft: var(--ff-moss-soft);
+}
+
+/*
+ * Firefly Café themes
+ * Dark (default): evening room — espresso ink canvas, cream type, bright gold
+ * Light (.light on <html>): day mode — parchment canvas, espresso ink type, antique brass
+ */
+:root {
+  color-scheme: dark;
+  --radius: 0.75rem;
+
+  /* brand — evening */
+  --ff-espresso: #1c1410;
+  --ff-espresso-deep: #120d0a;
+  --ff-espresso-soft: #291e17;
+  --ff-gold: #e8b54d;
+  --ff-amber-ember: #c9793a;
+  --ff-cream: #f6f0e4;
+  --ff-moss: #5c6b47;
+  --ff-moss-soft: #c9d6b0;
+
+  /* derived — raised card base for .card-sheen, gold text-gradient stops, glow strength */
+  --ff-sheen: #241a13;
+  --ff-grad-a: #f3d27f;
+  --ff-grad-b: #e8b54d;
+  --ff-grad-c: #c9793a;
+  --ff-glow: 0.45;
+
+  --background: #1c1410;
+  --foreground: #f6f0e4;
+  --card: #241a13;
+  --card-foreground: #f6f0e4;
+  --popover: #241a13;
+  --popover-foreground: #f6f0e4;
+  --primary: #e8b54d;
+  --primary-foreground: #1c1410;
+  --secondary: #2e2318;
+  --secondary-foreground: #f6f0e4;
+  --muted: #2b2016;
+  --muted-foreground: #b9a98e;
+  --accent: #3a2c1e;
+  --accent-foreground: #f6f0e4;
+  --destructive: #c0392b;
+  --border: rgba(232, 181, 77, 0.16);
+  --input: rgba(232, 181, 77, 0.22);
+  --ring: rgba(232, 181, 77, 0.55);
+  --chart-1: #e8b54d;
+  --chart-2: #c9793a;
+  --chart-3: #5c6b47;
+  --chart-4: #f6f0e4;
+  --chart-5: #8a6d3b;
+  --sidebar: #241a13;
+  --sidebar-foreground: #f6f0e4;
+  --sidebar-primary: #e8b54d;
+  --sidebar-primary-foreground: #1c1410;
+  --sidebar-accent: #2e2318;
+  --sidebar-accent-foreground: #f6f0e4;
+  --sidebar-border: rgba(232, 181, 77, 0.16);
+  --sidebar-ring: rgba(232, 181, 77, 0.55);
+}
+
+.light {
+  color-scheme: light;
+
+  /* brand — daylight on parchment */
+  --ff-espresso: #f6f0e4;
+  --ff-espresso-deep: #ece1c8;
+  --ff-espresso-soft: #fdf9f0;
+  --ff-gold: #96691a;
+  --ff-amber-ember: #a5581f;
+  --ff-cream: #2b2015;
+  --ff-moss: #4f5c3a;
+  --ff-moss-soft: #46543a;
+
+  /* derived */
+  --ff-sheen: #fdf8ec;
+  --ff-grad-a: #c89530;
+  --ff-grad-b: #96691a;
+  --ff-grad-c: #a5581f;
+  --ff-glow: 0.16;
+
+  --background: #f6f0e4;
+  --foreground: #2b2015;
+  --card: #fcf7eb;
+  --card-foreground: #2b2015;
+  --popover: #fcf7eb;
+  --popover-foreground: #2b2015;
+  --primary: #96691a;
+  --primary-foreground: #f6f0e4;
+  --secondary: #efe4cc;
+  --secondary-foreground: #2b2015;
+  --muted: #eee3ca;
+  --muted-foreground: #6f6148;
+  --accent: #f3e9d1;
+  --accent-foreground: #2b2015;
+  --destructive: #b03a2e;
+  --border: rgba(43, 32, 21, 0.14);
+  --input: rgba(43, 32, 21, 0.22);
+  --ring: rgba(150, 105, 26, 0.5);
+  --chart-1: #96691a;
+  --chart-2: #a5581f;
+  --chart-3: #4f5c3a;
+  --chart-4: #2b2015;
+  --chart-5: #7a5c33;
+  --sidebar: #fcf7eb;
+  --sidebar-foreground: #2b2015;
+  --sidebar-primary: #96691a;
+  --sidebar-primary-foreground: #f6f0e4;
+  --sidebar-accent: #efe4cc;
+  --sidebar-accent-foreground: #2b2015;
+  --sidebar-border: rgba(43, 32, 21, 0.14);
+  --sidebar-ring: rgba(150, 105, 26, 0.5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+  ::selection {
+    background: rgba(232, 181, 77, 0.85);
+    color: #1c1410;
+  }
+  .light ::selection {
+    background: rgba(150, 105, 26, 0.85);
+    color: #f6f0e4;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+  .text-glow {
+    text-shadow: 0 0 24px rgba(232, 181, 77, var(--ff-glow)),
+      0 0 60px rgba(232, 181, 77, calc(var(--ff-glow) * 0.4));
+  }
+  .gold-gradient-text {
+    background: linear-gradient(
+      115deg,
+      var(--ff-grad-a) 0%,
+      var(--ff-grad-b) 45%,
+      var(--ff-grad-c) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hairline {
+    background: linear-gradient(90deg, transparent, rgba(232, 181, 77, 0.5), transparent);
+    height: 1px;
+  }
+  .card-sheen {
+    background:
+      linear-gradient(160deg, rgba(232, 181, 77, 0.07), rgba(232, 181, 77, 0) 38%),
+      var(--ff-sheen);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ---------- firefly ambience ---------- */
+
+.ff-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ff-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #ffe9ad 0%, #e8b54d 55%, transparent 75%);
+  box-shadow: 0 0 12px 4px rgba(232, 181, 77, 0.55), 0 0 34px 10px rgba(232, 181, 77, 0.18);
+  opacity: 0;
+  animation-name: ff-drift, ff-blink;
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+@keyframes ff-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(2.2vw, -3.5vh, 0) scale(1.15); }
+  50% { transform: translate3d(-1.4vw, -7vh, 0) scale(0.9); }
+  75% { transform: translate3d(2.8vw, -11vh, 0) scale(1.05); }
+  100% { transform: translate3d(0, -16vh, 0) scale(1); }
+}
+
+@keyframes ff-blink {
+  0%, 100% { opacity: 0; }
+  12% { opacity: 0.95; }
+  30% { opacity: 0.25; }
+  46% { opacity: 0.85; }
+  64% { opacity: 0.1; }
+  82% { opacity: 0.7; }
+}
+
+/* daylight fireflies: deeper amber so they still read on parchment */
+.light .ff-dot {
+  background: radial-gradient(circle, #d9a03c 0%, #b97f1e 55%, transparent 75%);
+  box-shadow: 0 0 12px 4px rgba(185, 127, 30, 0.3), 0 0 34px 10px rgba(185, 127, 30, 0.1);
+}
+
+@keyframes ember-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 181, 77, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(232, 181, 77, 0); }
+}
+
+.ember-pulse {
+  animation: ember-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rise-in {
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes flicker-glow {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.6; }
+  43% { opacity: 1; }
+  45% { opacity: 0.75; }
+  46% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker-glow 7s linear infinite;
+}
+
+/* thin elegant scrollbar for panels */
+.lux-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.lux-scroll::-webkit-scrollbar-track {
+  background: rgba(232, 181, 77, 0.05);
+}
+.lux-scroll::-webkit-scrollbar-thumb {
+  background: rgba(232, 181, 77, 0.35);
+  border-radius: 9999px;
+}
